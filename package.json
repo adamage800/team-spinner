@@ -1,0 +1,17 @@
+{
+  "name": "spinner",
+  "version": "1.0.0",
+  "description": "A colorful CLI name selector with animations",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "figlet": "^1.6.0",
+    "gradient-string": "^2.0.2",
+    "cli-spinners": "^2.9.0"
+  },
+  "author": "Adam",
+  "license": "MIT"
+}
