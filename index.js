@@ -142,7 +142,7 @@ function clearScreen() {
 }
 
 function displayTitle() {
-  const title = figlet.textSync("DAILY SPINNER 3000", {
+  const title = figlet.textSync("TEAM SPINNER 3000", {
     font: "Standard",
     horizontalLayout: "default",
     verticalLayout: "default",

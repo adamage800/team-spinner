@@ -1,4 +1,4 @@
-# Daily spinner 3000
+# Team spinner 3000
 
 A fun, colorful CLI spinner for team leads who are tired of selecting daily standup members in a predictable order. This interactive spinner randomly selects team members and predicts their mood with playful personality traits!
 
