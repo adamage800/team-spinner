@@ -33,6 +33,7 @@ program.parse();
 const options = program.opts();
 
 let availableNames = [];
+const endCelebrationText = "Let's gooooo dream team!!!";
 
 if (options.list) {
   try {
@@ -119,6 +120,7 @@ const personalities = {
 };
 
 const namePersonalities = {};
+const selectedNames = [];
 
 let isAnimating = false;
 
@@ -154,6 +156,18 @@ function displayTitle() {
 function displayName(name, isSelected = false) {
   clearScreen();
   displayTitle();
+
+  if (selectedNames.length > 0) {
+    selectedNames.forEach((entry, index) => {
+      const personalityEmojis = personalities[entry.personality] || ["❓"];
+      const emoji = personalityEmojis[0];
+      console.log(
+        chalk.cyan(`#${index + 1} ${emoji} ${entry.personality} ${entry.name}`),
+      );
+    });
+    console.log();
+  }
+
   const personality = namePersonalities[name];
 
   const nameText = figlet.textSync(`${personality || ""} ${name}`, {
@@ -243,16 +257,105 @@ function animateSelection() {
   });
 }
 
+function animateFinalCelebration() {
+  return new Promise((resolve) => {
+    let counter = 0;
+    const maxAnimations = 20;
+    const gradients = [
+      gradient.rainbow,
+      gradient.pastel,
+      gradient.cristal,
+      gradient.teen,
+      gradient.mind,
+      gradient.morning,
+      gradient.vice,
+      gradient.passion,
+      gradient.fruit,
+      gradient.retro,
+    ];
+
+    const interval = setInterval(() => {
+      clearScreen();
+
+      const title = figlet.textSync(endCelebrationText, {
+        font: "Standard",
+        horizontalLayout: "default",
+        verticalLayout: "default",
+      });
+      const randomGradient =
+        gradients[Math.floor(Math.random() * gradients.length)];
+      console.log(randomGradient(title));
+      console.log("\n");
+
+      selectedNames.forEach((entry, index) => {
+        const personalityEmojis = personalities[entry.personality] || ["❓"];
+        const emoji =
+          personalityEmojis[
+            Math.floor(Math.random() * personalityEmojis.length)
+          ];
+        const colors = [
+          chalk.red,
+          chalk.green,
+          chalk.yellow,
+          chalk.blue,
+          chalk.magenta,
+          chalk.cyan,
+        ];
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        console.log(
+          randomColor(
+            `#${index + 1} ${emoji} ${entry.personality} ${entry.name}`,
+          ),
+        );
+      });
+
+      const celebEmojis = [
+        "🎉",
+        "🎊",
+        "✨",
+        "🌟",
+        "💫",
+        "🎆",
+        "🎇",
+        "🥳",
+        "🎈",
+      ];
+      const randomEmojis = Array.from(
+        { length: 20 },
+        () => celebEmojis[Math.floor(Math.random() * celebEmojis.length)],
+      ).join(" ");
+      console.log(chalk.bold.yellow(`\n${randomEmojis}\n`));
+
+      counter++;
+      if (counter >= maxAnimations) {
+        clearInterval(interval);
+        resolve();
+      }
+    }, 200);
+  });
+}
+
 async function selectNextName() {
   if (isAnimating) return;
 
   if (availableNames.length === 0) {
+    await animateFinalCelebration();
+
     clearScreen();
     console.log(
-      gradient.atlas(figlet.textSync("ALL DONE!", { font: "Standard" })),
+      gradient.pastel(
+        figlet.textSync(endCelebrationText, { font: "Standard" }),
+      ),
     );
-    console.log(chalk.bold.green("\n🎉 All names have been selected! 🎉\n"));
-    console.log(chalk.bold.cyan("✨ Thanks for using Name Spinner! ✨\n"));
+
+    selectedNames.forEach((entry, index) => {
+      const personalityEmojis = personalities[entry.personality] || ["❓"];
+      const emoji = personalityEmojis[0];
+      console.log(
+        chalk.cyan(`#${index + 1} ${emoji} ${entry.personality} ${entry.name}`),
+      );
+    });
+
     process.exit();
   }
 
@@ -263,7 +366,16 @@ async function selectNextName() {
   const randomIndex = Math.floor(Math.random() * availableNames.length);
   const selectedName = availableNames[randomIndex];
 
+  if (!namePersonalities[selectedName]) {
+    namePersonalities[selectedName] = getRandomPersonality();
+  }
+
   availableNames.splice(randomIndex, 1);
+
+  selectedNames.push({
+    name: selectedName,
+    personality: namePersonalities[selectedName],
+  });
 
   displayName(selectedName, true);
 
