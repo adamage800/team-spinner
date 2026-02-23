@@ -319,12 +319,44 @@ function animateFinalCelebration() {
         "🎇",
         "🥳",
         "🎈",
+        "🎁",
+        "🎀",
+        "🏆",
+        "👏",
+        "🙌",
+        "💪",
+        "🔥",
+        "⚡",
+        "💥",
+        "🌈",
+        "🚀",
+        "💯",
+        "🤩",
+        "😍",
+        "🥰",
+        "💖",
+        "💝",
       ];
-      const randomEmojis = Array.from(
-        { length: 20 },
+      const emojiRow1 = Array.from(
+        { length: 30 },
         () => celebEmojis[Math.floor(Math.random() * celebEmojis.length)],
       ).join(" ");
-      console.log(chalk.bold.yellow(`\n${randomEmojis}\n`));
+      const emojiRow2 = Array.from(
+        { length: 30 },
+        () => celebEmojis[Math.floor(Math.random() * celebEmojis.length)],
+      ).join(" ");
+      const emojiRow3 = Array.from(
+        { length: 30 },
+        () => celebEmojis[Math.floor(Math.random() * celebEmojis.length)],
+      ).join(" ");
+      const emojiRow4 = Array.from(
+        { length: 30 },
+        () => celebEmojis[Math.floor(Math.random() * celebEmojis.length)],
+      ).join(" ");
+      console.log(chalk.bold.yellow(`\n${emojiRow1}`));
+      console.log(chalk.bold.yellow(`${emojiRow2}`));
+      console.log(chalk.bold.yellow(`${emojiRow3}`));
+      console.log(chalk.bold.yellow(`${emojiRow4}\n`));
 
       counter++;
       if (counter >= maxAnimations) {
