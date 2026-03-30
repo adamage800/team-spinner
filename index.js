@@ -33,7 +33,7 @@ program.parse();
 const options = program.opts();
 
 let availableNames = [];
-const endCelebrationText = "Let's gooooo dream team!!!";
+const endCelebrationText = "Let's gooooo team!!!";
 
 if (options.list) {
   try {
@@ -118,6 +118,32 @@ const personalities = {
   fierce: ["🦁", "🐯", "🔥", "💪", "⚡", "👊", "💥", "🦅", "🗡️", "🏹"],
   bubbly: ["🫧", "💭", "✨", "🎈", "💫", "🌟", "🎊", "💖", "🦋", "🌈"],
 };
+
+const DANCING_FRAMES = [
+  ["  \\O/  ", "   |   ", "  / \\  "],
+  ["   O/  ", "  /|   ", "  / \\  "],
+  ["   O   ", "  /|\\  ", "  / \\  "],
+  ["  \\O   ", "   |\\  ", "  / \\  "],
+  ["   O   ", "   |\\  ", "  /|   "],
+  ["   O   ", "  /|   ", "   |\\  "],
+];
+
+function centerPad(str, width) {
+  if (str.length >= width) return str.substring(0, width);
+  const totalPad = width - str.length;
+  const leftPad = Math.floor(totalPad / 2);
+  return " ".repeat(leftPad) + str + " ".repeat(totalPad - leftPad);
+}
+
+function renderDancers(frameIndex, names) {
+  const rows = [[], [], [], []];
+  for (let i = 0; i < names.length; i++) {
+    const frame = DANCING_FRAMES[(frameIndex + i) % DANCING_FRAMES.length];
+    frame.forEach((line, l) => rows[l].push(line));
+    rows[3].push(centerPad(names[i], 7));
+  }
+  return rows.map((row) => row.join("  ")).join("\n");
+}
 
 const namePersonalities = {};
 const selectedNames = [];
@@ -260,7 +286,7 @@ function animateSelection() {
 function animateFinalCelebration() {
   return new Promise((resolve) => {
     let counter = 0;
-    const maxAnimations = 20;
+    const maxAnimations = 40;
     const gradients = [
       gradient.rainbow,
       gradient.pastel,
@@ -286,6 +312,16 @@ function animateFinalCelebration() {
         gradients[Math.floor(Math.random() * gradients.length)];
       console.log(randomGradient(title));
       console.log("\n");
+
+      console.log(
+        randomGradient(
+          renderDancers(
+            counter % DANCING_FRAMES.length,
+            selectedNames.map((e) => e.name),
+          ),
+        ),
+      );
+      console.log();
 
       selectedNames.forEach((entry, index) => {
         const personalityEmojis = personalities[entry.personality] || ["❓"];
