@@ -61,7 +61,7 @@ if (options.remove && options.remove.length > 0) {
   );
 }
 
-const personalities = {
+const safePersonalities = {
   cool: ["😎", "🕶️", "🔥", "💪", "🏆", "💯", "⚡", "🤘", "👑", "🎸"],
   smart: ["🧠", "📚", "💡", "🎓", "🤓", "📖", "🔬", "✍️", "🧪", "📝"],
   sporty: ["⚽", "🏃", "💪", "🎾", "🏋️", "🏀", "⚡", "🥇", "🎯", "🔥"],
@@ -117,6 +117,9 @@ const personalities = {
   elegant: ["🦢", "🌹", "💎", "✨", "🎀", "🌸", "💫", "🌟", "🦋", "🏰"],
   fierce: ["🦁", "🐯", "🔥", "💪", "⚡", "👊", "💥", "🦅", "🗡️", "🏹"],
   bubbly: ["🫧", "💭", "✨", "🎈", "💫", "🌟", "🎊", "💖", "🦋", "🌈"],
+};
+
+const genZPersonalities = {
   sigmatic: ["😎", "🗿", "💀", "🕶️", "🔥", "💯", "👑", "🦅", "⚡", "🤘"],
   rizzed: ["😏", "🫦", "💋", "😘", "🔥", "💖", "👀", "😍", "🥵", "💦"],
   skibbi: ["🚽", "💀", "🤡", "😭", "🌀", "🤮", "🥴", "🤯", "🧻", "🚿"],
@@ -160,6 +163,11 @@ const personalities = {
   auragod: ["✨", "🌟", "💫", "🔮", "⭐", "🌌", "⚡", "🌈", "🌀", "💎"],
   yeetery: ["✋", "🚀", "💥", "🌀", "🔥", "😂", "🥴", "💀", "⚡", "🤮"],
   suslord: ["👀", "🤨", "🕵️", "💀", "🤫", "🔍", "😬", "🚨", "🕶️", "🤐"],
+};
+
+const personalities = {
+  ...safePersonalities,
+  ...genZPersonalities,
 };
 
 const DANCING_FRAMES = [
