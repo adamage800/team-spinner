@@ -11,6 +11,7 @@ const genZPersonalities = require("./personalities/genZ");
 const negativePersonalities = require("./personalities/negative");
 const adamCustomPersonalities = require("./personalities/adamCustom");
 const millenialPersonalities = require("./personalities/millenial");
+const developerPersonalities = require("./personalities/developer");
 
 const program = new Command();
 
@@ -72,6 +73,7 @@ const personalities = {
   ...(config.negativePersonalities === "on" ? negativePersonalities : {}),
   ...(config.adamCustomPersonalities === "on" ? adamCustomPersonalities : {}),
   ...(config.millenialPersonalities === "on" ? millenialPersonalities : {}),
+  ...(config.developerPersonalities === "on" ? developerPersonalities : {}),
 };
 
 if (Object.keys(personalities).length === 0) {

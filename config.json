@@ -2,5 +2,6 @@
   "names": ["Ádám", "Dóri", "Áron", "Vera"],
   "safePersonalities": "off",
   "genZPersonalities": "on",
-  "negativePersonalities": "on"
+  "negativePersonalities": "on",
+  "developerPersonalities": "on"
 }
