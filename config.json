@@ -3,5 +3,7 @@
   "safePersonalities": "off",
   "genZPersonalities": "on",
   "negativePersonalities": "on",
+  "adamCustomPersonalities": "on",
+  "millenialPersonalities": "on",
   "developerPersonalities": "on"
 }
