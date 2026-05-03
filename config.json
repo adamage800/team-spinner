@@ -1,3 +1,5 @@
 {
-  "names": ["Ádám", "Dóri", "Áron", "Vera"]
+  "names": ["Ádám", "Dóri", "Áron", "Vera"],
+  "safePersonalities": "on",
+  "genZPersonalities": "on"
 }

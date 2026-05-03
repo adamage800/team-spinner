@@ -166,9 +166,18 @@ const genZPersonalities = {
 };
 
 const personalities = {
-  ...safePersonalities,
-  ...genZPersonalities,
+  ...(config.safePersonalities === "on" ? safePersonalities : {}),
+  ...(config.genZPersonalities === "on" ? genZPersonalities : {}),
 };
+
+if (Object.keys(personalities).length === 0) {
+  console.error(
+    chalk.red(
+      "Error: No personality groups enabled. Enable at least one in config.json.",
+    ),
+  );
+  process.exit(1);
+}
 
 const DANCING_FRAMES = [
   ["  \\O/  ", "   |   ", "  / \\  "],
