@@ -9,6 +9,8 @@ const config = require("./config.json");
 const safePersonalities = require("./personalities/safe");
 const genZPersonalities = require("./personalities/genZ");
 const negativePersonalities = require("./personalities/negative");
+const adamCustomPersonalities = require("./personalities/adamCustom");
+const millenialPersonalities = require("./personalities/millenial");
 
 const program = new Command();
 
@@ -68,6 +70,8 @@ const personalities = {
   ...(config.safePersonalities === "on" ? safePersonalities : {}),
   ...(config.genZPersonalities === "on" ? genZPersonalities : {}),
   ...(config.negativePersonalities === "on" ? negativePersonalities : {}),
+  ...(config.adamCustomPersonalities === "on" ? adamCustomPersonalities : {}),
+  ...(config.millenialPersonalities === "on" ? millenialPersonalities : {}),
 };
 
 if (Object.keys(personalities).length === 0) {
