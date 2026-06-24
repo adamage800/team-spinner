@@ -142,6 +142,14 @@ function displayTitle() {
     verticalLayout: "default",
   });
   console.log(gradient.atlas(title));
+  const now = new Date();
+  const dateStr = now.toLocaleDateString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  console.log(chalk.cyan(`  ${dateStr}`));
   console.log("\n");
 }
 
